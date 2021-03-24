@@ -54,7 +54,7 @@ const addProduct = async (req, res) => {
 		prod_stock: prod_stock,
 		prod_expire: prod_expire,
 		prod_weight: prod_weight,
-		prod_priorty:prod_priorty,
+		prod_priorty: "normal",
 		prod_cate_id: prod_cate_id,
 		prod_brand_id: prod_brand_id,
 		prod_acco_id: prod_acco_id,
