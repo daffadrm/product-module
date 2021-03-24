@@ -64,7 +64,12 @@ const product = sequelize.define('product', {
     prod_weight: {
       type: DataTypes.INTEGER,
       allowNull: true
-    }
+    },
+  
+  prod_priorty: {
+    type: DataTypes.STRING(40),
+    allowNull: false
+  }
   }, {
     sequelize,
     tableName: 'product',
