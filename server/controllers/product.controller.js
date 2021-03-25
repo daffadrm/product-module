@@ -108,9 +108,9 @@ const editProduct = async (req, res) => {
 }
 
 const editProductStock = async (req, res) => {
-	// const {
-	// 	order_qty ,
-	// } = req.body;
+	const {
+		prod_stock ,
+	} = req.body;
 	let prod = []
 	try {
 		prod = await req.context.models.product.findByPk(req.params.prod_id)
@@ -118,7 +118,7 @@ const editProductStock = async (req, res) => {
 		res.send({ error: true })
 	}
 	const product = await req.context.models.product.update({
-		prod_stock: prod.prod_stock - req.body,
+		prod_stock: prod.prod_stock - prod_stock,
 	}, {
 		returning: true,
 		where: { prod_id: req.params.prod_id }
