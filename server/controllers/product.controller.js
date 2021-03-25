@@ -107,6 +107,26 @@ const editProduct = async (req, res) => {
 }
 }
 
+const editProductStock = async (req, res) => {
+	// const {
+	// 	order_qty ,
+	// } = req.body;
+	let prod = []
+	try {
+		prod = await req.context.models.product.findByPk(req.params.prod_id)
+	} catch (error) {
+		res.send({ error: true })
+	}
+	const product = await req.context.models.product.update({
+		prod_stock: prod.prod_stock - req.body,
+	}, {
+		returning: true,
+		where: { prod_id: req.params.prod_id }
+	}
+	)
+	return res.send(product)
+}
+
 const deleteProduct = async (req, res) => { 
 	try {
 		
@@ -131,5 +151,6 @@ export default {
 	readProduct,
 	addProduct,
 	editProduct,
-	deleteProduct
+	deleteProduct,
+	editProductStock
 }
