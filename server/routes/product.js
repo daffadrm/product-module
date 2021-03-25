@@ -8,6 +8,7 @@ router.post('/', productCtrl.addProduct);
 router.post('/:tambahproduct', productCtrl.addProduct);
 router.put('/:prod_id', productCtrl.editProduct);
 router.put('/stock/:prod_id', productCtrl.editProductStock);
+router.put('/blokir/:prod_id', productCtrl.updateStatus);
 router.delete('/:prod_id', productCtrl.deleteProduct);
 
 export default (router)

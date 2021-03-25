@@ -118,13 +118,24 @@ const editProductStock = async (req, res) => {
 		res.send({ error: true })
 	}
 	const product = await req.context.models.product.update({
-		prod_stock: prod.prod_stock - prod_stock,
+		prod_stock: Number(prod.prod_stock) - Number(prod_stock),
 	}, {
 		returning: true,
 		where: { prod_id: req.params.prod_id }
 	}
 	)
 	return res.send(product)
+}
+
+const updateStatus = async (req, res) => {
+    const product = await sequelize.query('UPDATE * FROM product where prod_status = blokir, prod_reason= :prodReason',
+        { replacements: { prod_status, prod_reason: parseInt(req.params.id) }, type: sequelize.QueryTypes.UPDATE,
+        model: req.context.models.product,
+        mapToModel: true } 
+    ).then(function (product) {
+        console.log(product)
+    })
+    return res.send(product);
 }
 
 const deleteProduct = async (req, res) => { 
@@ -152,5 +163,6 @@ export default {
 	addProduct,
 	editProduct,
 	deleteProduct,
-	editProductStock
+	editProductStock,
+	updateStatus
 }
