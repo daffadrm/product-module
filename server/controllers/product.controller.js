@@ -1,3 +1,5 @@
+import {sequelize} from 'sequelize'
+
 const findProduct = async (req, res) => {
 	const product = await req.context.models.product.findByPk(req.params.prod_id,
 		{include:[
