@@ -69,6 +69,14 @@ const product = sequelize.define('product', {
   prod_priorty: {
     type: DataTypes.STRING(40),
     allowNull: false
+  },
+  prod_status: {
+    type: DataTypes.STRING(40),
+    allowNull: false
+  },
+  prod_reason: {
+    type: DataTypes.STRING(255),
+    allowNull: false
   }
   }, {
     sequelize,
