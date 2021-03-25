@@ -128,7 +128,7 @@ const editProductStock = async (req, res) => {
 }
 
 const updateStatus = async (req, res) => {
-    const product = await sequelize.query('UPDATE * FROM product where prod_status = blokir, prod_reason= :prodReason',
+    const product = await sequelize.query('UPDATE * FROM product set prod_status = blokir, prod_reason where prod_id= :prodId',
         { replacements: { prod_status, prod_reason: parseInt(req.params.id) }, type: sequelize.QueryTypes.UPDATE,
         model: req.context.models.product,
         mapToModel: true } 
