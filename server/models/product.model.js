@@ -76,7 +76,7 @@ const product = sequelize.define('product', {
   },
   prod_reason: {
     type: DataTypes.STRING(255),
-    allowNull: false
+    allowNull: true
   }
   }, {
     sequelize,
