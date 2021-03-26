@@ -1,4 +1,4 @@
-import {sequelize} from 'sequelize'
+import {sequelize} from '../models/IndexModel'
 
 const findProduct = async (req, res) => {
 	const product = await req.context.models.product.findByPk(req.params.prod_id,
@@ -130,15 +130,24 @@ const editProductStock = async (req, res) => {
 }
 
 const updateStatus = async (req, res) => {
-    const product = await sequelize.query('UPDATE * FROM product set prod_status = blokir, prod_reason = "" where prod_id= :prodId',
-        { replacements: { prodId: parseInt(req.params.id) }, type: sequelize.QueryTypes.UPDATE,
-        model: req.context.models.product,
-        mapToModel: true } 
+    const product = await sequelize.query('UPDATE product set prod_status = :status, prod_reason = :reason where prod_id= :prodId',
+        { replacements: { prodId: parseInt(req.params.prod_id), reason:req.body.prod_reason, status:"blokir" }, type: sequelize.QueryTypes.SELECT} 
     ).then(function (product) {
         console.log(product)
     })
-    return res.send(product);
+    return res.send(true);
 }
+
+const updatePriorty = async (req, res) => {
+    const product = await sequelize.query('UPDATE product set prod_priorty = :priorty where prod_id= :prodId',
+        { replacements: { prodId: parseInt(req.params.prod_id), priorty:req.body.prod_priorty}, type: sequelize.QueryTypes.SELECT} 
+    ).then(function (product) {
+        console.log(product)
+    })
+    return res.send(true);
+}
+
+
 
 const deleteProduct = async (req, res) => { 
 	try {
@@ -166,5 +175,6 @@ export default {
 	editProduct,
 	deleteProduct,
 	editProductStock,
-	updateStatus
+	updateStatus,
+	updatePriorty
 }
