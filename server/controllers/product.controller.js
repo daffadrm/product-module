@@ -147,6 +147,15 @@ const updatePriorty = async (req, res) => {
     return res.send(true);
 }
 
+const selectBlokir = async (req, res) => {
+    const product = await sequelize.query(`select acco_id,prod_id,prod_name, prod_desc,prod_price, prod_stock, prod_weight,prod_status, prod_reason from account join product
+	on acco_id = prod_acco_id
+	where acco_id = :accoId and prod_status='blokir'`,
+        { replacements: { accoId: parseInt(req.params.acco_id)}, type: sequelize.QueryTypes.SELECT} 
+    ) 
+    return res.send(product);
+}
+
 
 
 const deleteProduct = async (req, res) => { 
@@ -176,5 +185,6 @@ export default {
 	deleteProduct,
 	editProductStock,
 	updateStatus,
-	updatePriorty
+	updatePriorty,
+	selectBlokir
 }
