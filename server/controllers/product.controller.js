@@ -166,9 +166,9 @@ const selectAbis = async (req, res) => {
 }
 
 const selectAccount = async (req, res) => {
-    const product = await sequelize.query(`select acco_id,prod_id,prod_name, prod_desc,prod_price, prod_stock, prod_weight,prod_status, prod_reason from account join product
-	on acco_id = prod_acco_id
-	where acco_id = :accoId`,
+    const product = await sequelize.query(`select prim_id,prim_path,prod_id,prod_name, prod_desc,prod_price, prod_stock, prod_weight,prod_status, prod_reason from product join product_images
+	on prod_id = prim_prod_id
+	where prod_acco_id = :accoId`,
         { replacements: { accoId: parseInt(req.params.acco_id)}, type: sequelize.QueryTypes.SELECT} 
     ) 
     return res.send(product);
