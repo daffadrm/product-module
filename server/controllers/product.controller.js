@@ -173,6 +173,15 @@ const selectAccount = async (req, res) => {
     ) 
     return res.send(product);
 }
+const selectAdmin = async (req, res) => {
+    const product2 = await sequelize.query(`select prim_path,acco_id,acco_nama,prod_id,prod_name, prod_desc,prod_price, prod_stock, prod_weight,prod_status, prod_reason
+	from account join product on acco_id = prod_acco_id
+	join product_images on prod_id = prim_prod_id`,
+        { type: sequelize.QueryTypes.SELECT} 
+    ) 
+    return res.send(product2);
+}
+
 
 
 
@@ -206,5 +215,6 @@ export default {
 	updatePriorty,
 	selectBlokir,
 	selectAbis,
-	selectAccount
+	selectAccount,
+	selectAdmin
 }
